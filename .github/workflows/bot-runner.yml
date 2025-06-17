@@ -37,7 +37,7 @@ jobs:
         run: |
           # Run the bot with a timeout of 3 hours and 50 minutes (just under 4 hours)
           # This ensures the next scheduled run can start
-          timeout 3h50m npm start
+          npm start
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           
