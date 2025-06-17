@@ -1,0 +1,47 @@
+name: Telegram Bot Runner
+
+on:
+  schedule:
+    # Run every 4 hours
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+    # Allow manual triggering
+
+jobs:
+  run-bot:
+    name: Run Telegram Bot
+    runs-on: ubuntu-latest
+    
+    # Ensure only one instance of this workflow runs at a time
+    concurrency:
+      group: ${{ github.workflow }}-bot-runner
+      cancel-in-progress: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build bot
+        run: npm run build
+      
+      - name: Run bot
+        run: |
+          # Run the bot with a timeout of 3 hours and 50 minutes (just under 4 hours)
+          # This ensures the next scheduled run can start
+          timeout 3h50m npm start
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          
+      - name: Report status
+        if: always()
+        run: |
+          echo "Bot run completed or timed out" 
