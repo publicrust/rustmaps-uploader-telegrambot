@@ -1,32 +1,32 @@
-# Rust Maps Uploader Telegram Bot
+# Rust Maps Uploader Telegram Bot (@rustmapsbot)
 
-A Telegram bot written in TypeScript that accepts `.map` files for the game **Rust**, uploads them to Facepunch's public map-upload API, and returns a download link together with an automatically generated Oxide plugin that sets the map URL on the server.
+Telegram бот [@rustmapsbot](https://t.me/rustmapsbot), написанный на TypeScript, который принимает `.map` файлы для игры **Rust**, загружает их на публичный API Facepunch и возвращает ссылку для скачивания вместе с автоматически сгенерированным Oxide плагином для установки карты на сервере.
 
-## Features
+## Возможности
 
-* `/start` — welcome message.
-* `/list` — shows all maps you have uploaded so far.
-* Send any `.map` document to trigger the upload workflow.
-* Automatic retry logic (up to 10 attempts) when talking to the Facepunch API.
-* Persists links per-user in a simple JSON file (`maps.json`).
-* Generates and sends back a ready-to-use C# plugin with the uploaded map URL hard-wired.
+* `/start` — приветственное сообщение.
+* `/list` — показывает все загруженные вами карты.
+* Отправьте любой `.map` файл боту для запуска процесса загрузки.
+* Автоматическая логика повторных попыток (до 10 раз) при общении с API Facepunch.
+* Сохраняет ссылки для каждого пользователя в простом JSON файле (`maps.json`).
+* Генерирует и отправляет готовый к использованию C# плагин с URL загруженной карты.
 
-## Getting started
+## Начало работы
 
-1. **Install dependencies**
+1. **Установка зависимостей**
    ```bash
    npm install
    ```
-2. **Configure the bot token**
-   Create an `.env` file next to `package.json` with the following content:
+2. **Настройка токена бота**
+   Создайте файл `.env` рядом с `package.json` со следующим содержимым:
    ```bash
-   BOT_TOKEN=<your_telegram_bot_token>
+   BOT_TOKEN=<токен_вашего_telegram_бота>
    ```
-3. **Run in development mode** (requires `ts-node` which is installed automatically):
+3. **Запуск в режиме разработки** (требуется `ts-node`, который устанавливается автоматически):
    ```bash
    npm run dev
    ```
-4. **Build & run**
+4. **Сборка и запуск**
    ```bash
    npm run build
    npm start
@@ -34,11 +34,11 @@ A Telegram bot written in TypeScript that accepts `.map` files for the game **Ru
 
 ## Docker
 
-You can also build and run the bot inside Docker:
+Вы также можете собрать и запустить бота в Docker:
 
 ```bash
 docker build -t rustmaps-uploader-telegrambot .
-docker run -e BOT_TOKEN=<your_telegram_bot_token> rustmaps-uploader-telegrambot
+docker run -e BOT_TOKEN=<токен_вашего_telegram_бота> rustmaps-uploader-telegrambot
 ```
 
 ## GitHub Workflow
@@ -60,4 +60,4 @@ Workflow автоматически запустит бота и будет по
 
 ---
 
-Inspired by the original Next.js web uploader converted to a Telegram experience. 
+Создано на основе веб-загрузчика Next.js, переделанного в Telegram бота. 
