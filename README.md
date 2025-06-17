@@ -1,63 +1,25 @@
-# Rust Maps Uploader Telegram Bot (@rustmapsbot)
+# Rust Maps Uploader Bot (@rustmapsbot)
 
-Telegram бот [@rustmapsbot](https://t.me/rustmapsbot), написанный на TypeScript, который принимает `.map` файлы для игры **Rust**, загружает их на публичный API Facepunch и возвращает ссылку для скачивания вместе с автоматически сгенерированным Oxide плагином для установки карты на сервере.
+Telegram bot that uploads Rust map files to Facepunch API and returns download URL with Oxide plugin.
 
-## Возможности
-
-* `/start` — приветственное сообщение.
-* `/list` — показывает все загруженные вами карты.
-* Отправьте любой `.map` файл боту для запуска процесса загрузки.
-* Автоматическая логика повторных попыток (до 10 раз) при общении с API Facepunch.
-* Сохраняет ссылки для каждого пользователя в простом JSON файле (`maps.json`).
-* Генерирует и отправляет готовый к использованию C# плагин с URL загруженной карты.
-
-## Начало работы
-
-1. **Установка зависимостей**
-   ```bash
-   npm install
-   ```
-2. **Настройка токена бота**
-   Создайте файл `.env` рядом с `package.json` со следующим содержимым:
-   ```bash
-   BOT_TOKEN=<токен_вашего_telegram_бота>
-   ```
-3. **Запуск в режиме разработки** (требуется `ts-node`, который устанавливается автоматически):
-   ```bash
-   npm run dev
-   ```
-4. **Сборка и запуск**
-   ```bash
-   npm run build
-   npm start
-   ```
-
-## Docker
-
-Вы также можете собрать и запустить бота в Docker:
+## Quick Start
 
 ```bash
-docker build -t rustmaps-uploader-telegrambot .
-docker run -e BOT_TOKEN=<токен_вашего_telegram_бота> rustmaps-uploader-telegrambot
+# Install
+npm install
+
+# Configure
+echo "BOT_TOKEN=your_token" > .env
+
+# Run
+npm start
 ```
 
-## GitHub Workflow
+## Features
+- Upload .map files to Facepunch
+- Get download links
+- Receive ready-to-use Oxide plugins
+- Command: /list to see upload history
 
-Бот настроен на автоматический запуск через GitHub Actions:
-
-- **bot-runner.yml** - основной workflow, запускающий бота каждые 4 часа
-  - Использует concurrency для предотвращения одновременного запуска нескольких экземпляров
-  - Автоматически останавливается через 3 часа 50 минут для экономии ресурсов
-  - Может быть запущен вручную через вкладку Actions
-
-Для настройки GitHub Actions:
-
-1. Добавьте BOT_TOKEN в секреты репозитория (Settings → Secrets → Actions → New repository secret)
-2. Убедитесь, что GitHub Actions включены для репозитория
-3. Первый запуск можно выполнить вручную через вкладку Actions
-
-Workflow автоматически запустит бота и будет поддерживать его работу.
-
----
-
-Создано на основе веб-загрузчика Next.js, переделанного в Telegram бота. 
+## GitHub Actions
+Bot runs automatically every 4 hours via GitHub Actions workflow. 
