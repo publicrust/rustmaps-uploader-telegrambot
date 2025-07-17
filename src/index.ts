@@ -327,6 +327,9 @@ bot.on('document', async (ctx: Context) => {
       source: Buffer.from(plugin.content, 'utf8'),
       filename: plugin.filename,
     });
+
+    // 5. Send support message
+    await ctx.reply(SUPPORT_TEXT, { parse_mode: 'HTML' });
   } catch (error) {
     console.error('Handler error', error);
     ctx.reply('❌ An unexpected error occurred.');
